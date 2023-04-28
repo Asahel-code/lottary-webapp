@@ -5,7 +5,7 @@ import { useUserStore } from "../zustand/Store";
 const AuthCheck = ({ children }) => {
   const user = useUserStore((state) => state.user);
 
-  return user?.token ? <>{children}</> : <Navigate to="/login" />;
+  return user?.phone ? <>{children}</> : <Navigate to="/login" />;
 };
 
 export default AuthCheck;

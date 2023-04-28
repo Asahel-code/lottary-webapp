@@ -6,7 +6,7 @@ const Footer = () => {
 
     const footerStyling = "bg-[#150C22] text-white";
     return (
-        <footer className={location.pathname === "/" ? `${footerStyling} w-full fixed bottom-0 left-0 z-[99]`: footerStyling}>
+        <footer className={location.pathname === "/" || location.pathname === "/verify-account" ? `${footerStyling} w-full fixed bottom-0 left-0 z-[99]`: footerStyling}>
             <div className="mx-auto max-w-7xl overflow-hidden px-6 py-20 sm:py-10 lg:px-8">
                 <div className="mt-10 flex justify-center space-x-10">
                     <a href="#" className="text-gray-400 hover:text-gray-500">

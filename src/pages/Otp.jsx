@@ -32,7 +32,7 @@ export const Otp = () => {
 
         await AuthServices.verifyAccount(data).then(() => {
             navigate("/");
-            swal("Success", "", "success");
+            swal("Success", "Your account has been verified successfully", "success");
         })
             .catch((error) => {
                 swal("error!", getError(error), "error")

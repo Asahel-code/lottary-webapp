@@ -1,9 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../utils/zustand/Store";
 
 const Navbar = () => {
 
     const user = useUserStore((state) => state.user);
+    const removeToken = useUserStore((state) => state.removeToken);
+    const navigate = useNavigate();
+
+    const logout = () => {
+        removeToken();
+        navigate('/login')
+    }
     return (
         <header className="bg-white shadow-md">
             <nav className="mx-auto flex max-w-7xl items-center justify-between p-6 lg:px-8" aria-label="Global">
@@ -19,9 +26,10 @@ const Navbar = () => {
                         </svg>
                     </button>
                 </div>
-                {!user.token && <div className="hidden lg:flex lg:gap-x-12">
+                {!user?.phone ? <div className="hidden lg:flex lg:gap-x-12">
                     <Link className="text-sm font-semibold leading-6 text-gray-900" to="/login">Log in <span aria-hidden="true">&rarr;</span></Link>
-                </div>}
+                </div> :
+                    <button className="px-2 py-2 bg-indigo-500 text-white rounded-lg hover:shadow-xl" onClick={logout}>Logout</button>}
             </nav>
             {/* <!-- Mobile menu, show/hide based on menu open state. --> */}
             <div className="lg:hidden" role="dialog" aria-modal="true">
@@ -48,9 +56,10 @@ const Navbar = () => {
                                 <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Marketplace</a>
                                 <a href="#" className="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50">Company</a>
                             </div>
-                            {!user?.token && <div className="py-6">
+                            {!user?.phone ? <div className="py-6">
                                 <Link className="-mx-3 block rounded-lg px-3 py-2.5 text-base font-semibold leading-7 text-gray-900 hover:bg-gray-50" to="/login">Log in </Link>
-                            </div>}
+                            </div> :
+                                <button className="px-2 py-2 bg-indigo-500 text-white rounded-lg hover:shadow-xl" onClick={logout}>Logout</button>}
                         </div>
                     </div>
                 </div>

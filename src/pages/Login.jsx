@@ -30,7 +30,7 @@ export const Login = () => {
             setToken(response);
             navigate("/verify-account");
 
-            swal(response?.username, "you have logged in successfully", "success");
+            swal("Success", "you have logged in successfully", "success");
         })
             .catch((error) => {
                 swal("error!", getError(error), "error")

@@ -1,9 +1,10 @@
-import { Dashboard, Login, Otp, Register } from '../pages'
+import { Dashboard, Login, Otp, Register } from '../pages';
+import AuthCheck from './middleware/AuthCheck';
 
 export const routes = [
     {
         path: '/',
-        element: <Dashboard />
+        element: <AuthCheck><Dashboard /></AuthCheck>
     },
     {
         path: '/login',
@@ -15,7 +16,7 @@ export const routes = [
     },
     {
         path: '/verify-account',
-        element: <Otp/>
+        element: <AuthCheck><Otp /></AuthCheck>
     },
 
 ]

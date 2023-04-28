@@ -29,7 +29,7 @@ export const Register = () => {
         await AuthServices.register(state)
         .then((response) => {
             setToken(response);
-            swal("Success", response.message, "success");
+            swal("Success", "Successfully created account", "success");
             navigate('/login');
         })
         .catch((error) => {
