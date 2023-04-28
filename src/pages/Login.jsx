@@ -10,7 +10,7 @@ export const Login = () => {
 
     const navigate = useNavigate();
     const [state, setState] = useState({
-        email: "",
+        phone: "",
         password: "",
     });
     // const [loading, setLoading] = useState(false);
@@ -28,7 +28,7 @@ export const Login = () => {
 
         await AuthServices.login(state).then((response) => {
             setToken(response);
-            navigate("/");
+            navigate("/verify-account");
 
             swal(response?.username, "you have logged in successfully", "success");
         })
@@ -47,8 +47,8 @@ export const Login = () => {
                     <form className="space-y-6" onSubmit={handleSubmit}>
                         <div className="rounded-md shadow-sm flex flex-col gap-2">
                             <div className="flex flex-col">
-                                <label htmlFor="email-address">Email address</label>
-                                <input id="email-address" name="email" type="email" required className="w-full rounded-t-md border border-indigo-500 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address" onChange={handleChange} />
+                                <label htmlFor="email-address">Phone number</label>
+                                <input id="email-address" name="phone" type="text" required className="w-full rounded-t-md border border-indigo-500 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="Email address" onChange={handleChange} />
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="password">Password</label>

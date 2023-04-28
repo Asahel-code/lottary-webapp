@@ -5,7 +5,7 @@ const BASE_URL = ENDPOINT;
 
 const AxiosUtility = axios.create({
   baseURL: `${BASE_URL}`,
-  timeout: 10000,
+  timeout: 100000,
   headers: {
     accept: 'application/json',
     'Cache-Control': 'no-cache',

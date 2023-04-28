@@ -6,26 +6,20 @@ export const useUserStore = create(
     persist(
       (set) => ({
         user: {
-          token: null,
-          isVerified: null,
-          username: null
+         phone: null
         },
         setToken: (response) =>
           set((state) => ({
             user: {
               ...state.user,
-              token: response?.accessToken,
-              isVerified: response?.isVerified,
-              username: response?.username
+              phone: response.phone
             }
           })),
         removeToken: () =>
           set((state) => ({
             user: {
               ...state.user,
-              token: null,
-              isVerified: null,
-              username: null
+              phone: null
             }
           })),
       }),

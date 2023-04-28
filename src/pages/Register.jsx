@@ -3,15 +3,18 @@ import AuthServices from "../utils/services/AuthServices";
 import { Link, useNavigate } from "react-router-dom";
 import swal from "sweetalert";
 import Layout from "../components/Layout";
+import { getError } from "../utils/getError";
+import { useUserStore } from "../utils/zustand/Store";
 
 export const Register = () => {
 
     const [state, setState] = useState({
-        phoneNumber: "",
+        phone: "",
         email: "",
         password: "",
     });
     // const [loading, setLoading] = useState(false);
+    const setToken = useUserStore((state) => state.setToken);
 
     const navigate = useNavigate();
     const handleChange = (e) => {
@@ -23,9 +26,14 @@ export const Register = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await AuthServices.register(state).then((response) => {
+        await AuthServices.register(state)
+        .then((response) => {
+            setToken(response);
             swal("Success", response.message, "success");
             navigate('/login');
+        })
+        .catch((error) => {
+            swal('Error!', getError(error), "error");
         })
     }
     return (
@@ -39,7 +47,7 @@ export const Register = () => {
                         <div className="flex flex-col gap-2 shadow-sm">
                             <div className="flex flex-col">
                                 <label htmlFor="phone-number">Phone number</label>
-                                <input id="phone-number" name="phoneNumber" type="number" required className="w-full rounded-t-md border border-indigo-500 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="+2547..." onChange={handleChange} />
+                                <input id="phone-number" name="phone" type="text" required className="w-full rounded-t-md border border-indigo-500 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="+2547..." onChange={handleChange} />
                             </div>
                             <div className="flex flex-col">
                                 <label htmlFor="email-address">Email address</label>

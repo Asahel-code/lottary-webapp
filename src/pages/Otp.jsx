@@ -10,11 +10,11 @@ export const Otp = () => {
 
     const navigate = useNavigate();
     const [state, setState] = useState({
-        otp: ""
+        code: ""
     });
     // const [loading, setLoading] = useState(false);
 
-    const setToken = useUserStore((state) => state.setToken);
+    const user = useUserStore((state) => state.user);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -25,10 +25,13 @@ export const Otp = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        await AuthServices.verifyAccount(state).then((response) => {
-            setToken(response);
-            navigate("/");
+        const data = {
+            code: state.code,
+            phone: user.phone
+        }
 
+        await AuthServices.verifyAccount(data).then(() => {
+            navigate("/");
             swal("Success", "", "success");
         })
             .catch((error) => {
@@ -46,7 +49,7 @@ export const Otp = () => {
                         <div className="rounded-md shadow-sm">
                             <div>
                                 <label className="pb-6" htmlFor="otp">OTP code</label>
-                                <input id="otp" name="otp" type="text" required className="relative block w-full rounded-t-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="OTP" onChange={handleChange} />
+                                <input id="otp" name="code" type="text" required className="relative block w-full rounded-t-md border-0 py-1.5 px-2 text-gray-900 ring-1 ring-inset ring-gray-100 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" placeholder="OTP" onChange={handleChange} />
                             </div>
                         </div>
 
